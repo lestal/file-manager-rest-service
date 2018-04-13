@@ -4,7 +4,7 @@ import com.smartvid.directory.exceptions.DirNotFoundException;
 import com.smartvid.directory.model.DirectoryItem;
 import com.smartvid.directory.model.FileAttributes;
 import com.smartvid.directory.model.FileItem;
-import com.smartvid.directory.service.FileManagerService;
+import com.smartvid.directory.service.IFileManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.List;
@@ -24,13 +23,13 @@ import java.util.List;
 public class FileManagerController {
 
     @Autowired
-    FileManagerService fileManagerService;
+    IFileManagerService iFileManagerService;
 
     @RequestMapping(value = "/dir/{dirName}", method = RequestMethod.GET, headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<List<DirectoryItem>> findAll(@PathVariable String dirName) {
         this.validateDir(dirName);
-        List<DirectoryItem> dirs = fileManagerService.findByDirName(dirName);
+        List<DirectoryItem> dirs = iFileManagerService.findByDirName(dirName);
         return new ResponseEntity<>(dirs, HttpStatus.OK);
     }
 
@@ -39,7 +38,7 @@ public class FileManagerController {
     public ResponseEntity<List<FileItem>> findAllFiles(HttpServletRequest request) {
         String dirName = extractDirNameFromRequest(request);
         this.validateDir(dirName);
-        List<FileItem> dirs = fileManagerService.findFilesByDirName(dirName);
+        List<FileItem> dirs = iFileManagerService.findFilesByDirName(dirName);
         return new ResponseEntity<>(dirs, HttpStatus.OK);
     }
 
@@ -49,7 +48,7 @@ public class FileManagerController {
     public ResponseEntity<FileAttributes> findFileAttributes(HttpServletRequest request) {
         String fileName = extractDirNameFromRequest(request);
         this.validateDir(fileName);
-        FileAttributes attr = fileManagerService.findFileAttributesByPath(fileName);
+        FileAttributes attr = iFileManagerService.findFileAttributesByPath(fileName);
         return new ResponseEntity<>(attr, HttpStatus.OK);
     }
 
@@ -69,7 +68,7 @@ public class FileManagerController {
 
   private boolean isDirExist(String path) {
         try {
-            return Files.exists(Paths.get(fileManagerService.getRootResource(), path));
+            return Paths.get(iFileManagerService.getRootResource(), path).toFile().exists();
         } catch (InvalidPathException ipe) {
             return false;
         }

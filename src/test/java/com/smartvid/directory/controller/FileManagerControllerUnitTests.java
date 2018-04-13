@@ -1,7 +1,7 @@
 package com.smartvid.directory.controller;
 
 import com.smartvid.directory.exceptions.DirNotFoundException;
-import com.smartvid.directory.service.FileManagerService;
+import com.smartvid.directory.service.IFileManagerService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,26 +13,26 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FileManagerControllerUnitTest {
+public class FileManagerControllerUnitTests {
 
     @InjectMocks
     private FileManagerController fileManagerController = new FileManagerController();
 
     @Mock
-    private FileManagerService fileManagerService;
+    private IFileManagerService IFileManagerService;
 
     @Before
     public void before() {
 
         MockitoAnnotations.initMocks(this);
-        when(fileManagerService.getRootResource()).thenReturn("target");
+        when(IFileManagerService.getRootResource()).thenReturn("target");
     }
 
     @Test
     public void validateDir_shouldExists() {
 
         fileManagerController.validateDir("classes");
-        verify(fileManagerService, times(1)).getRootResource();
+        verify(IFileManagerService, times(1)).getRootResource();
 
     }
 

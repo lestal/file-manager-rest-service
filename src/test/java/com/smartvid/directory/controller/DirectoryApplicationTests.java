@@ -1,6 +1,6 @@
 package com.smartvid.directory.controller;
 
-import com.smartvid.directory.DirectoryApplication;
+import com.smartvid.directory.DirectoryApplicationRunner;
 import com.smartvid.directory.model.DirectoryItem;
 import com.smartvid.directory.model.enums.ItemType;
 import org.junit.Before;
@@ -34,10 +34,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = DirectoryApplication.class)
+@SpringBootTest(classes = DirectoryApplicationRunner.class)
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets")
 @WebAppConfiguration
-public class DirectoryApplicationServiceTest {
+public class DirectoryApplicationTests {
     @Rule
     public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("target/generated-snippets");
 

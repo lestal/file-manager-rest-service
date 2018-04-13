@@ -1,22 +1,19 @@
 package com.smartvid.directory.model.abstracts;
 
-import com.smartvid.directory.model.interfaces.TreeNode;
+import com.smartvid.directory.model.interfaces.ITreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 
-public abstract class AbstractTreeNode<T extends TreeNode> implements TreeNode<T>  {
+public abstract class AbstractTreeNode<T extends ITreeNode> implements ITreeNode<T> {
     private String path;
     private List<T> children = new ArrayList<>();
 
     public AbstractTreeNode(List<T> children, String name) {
         this.children = children;
         this.path = name;
-    }
-
-    public AbstractTreeNode() {
     }
 
     public AbstractTreeNode(String name) {

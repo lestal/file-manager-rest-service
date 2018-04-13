@@ -2,6 +2,6 @@ package com.smartvid.directory.model.interfaces;
 
 import com.smartvid.directory.model.enums.ItemType;
 
-public interface Item extends TreeNode<Item> {
+public interface ITreeItem extends ITreeNode<ITreeItem> {
     ItemType getType();
 }

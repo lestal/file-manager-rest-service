@@ -6,8 +6,8 @@ import com.smartvid.directory.model.DirectoryItem;
 import com.smartvid.directory.model.FileAttributes;
 import com.smartvid.directory.model.FileItem;
 import com.smartvid.directory.model.inits.InitialDirs;
-import com.smartvid.directory.model.interfaces.Item;
-import com.smartvid.directory.service.FileManagerService;
+import com.smartvid.directory.model.interfaces.ITreeItem;
+import com.smartvid.directory.service.IFileManagerService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +19,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -29,14 +28,16 @@ import java.util.stream.Stream;
 
 @Component("fileManagerService")
 @Transactional
-public class FileManagerServiceImpl implements FileManagerService {
-    private final static String BASE_DIR = "target";
-    private final static URL ROOT_RESOURCE = getRoot();
-    private final static Logger LOGGER = Logger.getLogger(FileManagerServiceImpl.class.getName());
-
+public class FileManagerServiceImpl implements IFileManagerService {
+    private static final String BASE_DIR = "target";
+    private static final URL ROOT_RESOURCE = getRoot();
+    private static final Logger LOGGER = Logger.getLogger(FileManagerServiceImpl.class.getName());
+    private static final int KB = 1024;
     static {
         populateInitialDirs();
     }
+
+
 
     private File joinWithRoot(String dirName) {
         String resource = (ROOT_RESOURCE != null ? ROOT_RESOURCE.getPath() : null) + dirName;
@@ -81,7 +82,7 @@ public class FileManagerServiceImpl implements FileManagerService {
             builder.setCreationTime(bfa.creationTime().toString());
             builder.setModifiedDate(bfa.lastModifiedTime().toString());
             builder.setHidden(f.isHidden());
-            builder.setFileSize(f.getUsableSpace() / 1024);
+            builder.setFileSize(f.getUsableSpace() / KB);
             builder.setRights(readFilePermissions(f));
 
         } catch (IOException e) {
@@ -102,7 +103,7 @@ public class FileManagerServiceImpl implements FileManagerService {
                 + (file.canWrite() ? "-w" : "");
     }
 
-    private List<Item> getSubDirs(File file) {
+    private List<ITreeItem> getSubDirs(File file) {
         return Stream.of(Objects.requireNonNull(file.listFiles()))
                 .filter(File::isDirectory)
                 .map(f -> new DirectoryItem(getSubDirs(f), f.getAbsolutePath(), getFilesCountInDir(f)))
@@ -134,7 +135,7 @@ public class FileManagerServiceImpl implements FileManagerService {
 
     private static void logIfNotCreated(boolean newFile, String dir) {
         if (!newFile) {
-            LOGGER.log(Level.WARNING, MessageFormat.format("File or dir {0} is not created.", dir));
+            LOGGER.log(Level.WARNING, "File or dir {0} is not created.", dir);
         }
     }
 

@@ -8,14 +8,11 @@ public class FileAttributes {
     private String modifiedDate;
     private String rights;
 
-    public FileAttributes() {
-    }
     public static FileAttributesBuilder newBuilder() {
         return new FileAttributes().new FileAttributesBuilder();
     }
     public class FileAttributesBuilder {
-        public FileAttributesBuilder() {
-        }
+
         public FileAttributesBuilder setCreationTime(String creationTime) {
             FileAttributes.this.createdDate = creationTime;
             return this;
@@ -65,8 +62,4 @@ public class FileAttributes {
     public String getRights() {
         return rights;
     }
-
-
-
-
 }

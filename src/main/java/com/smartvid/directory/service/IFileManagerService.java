@@ -6,7 +6,7 @@ import com.smartvid.directory.model.FileItem;
 
 import java.util.List;
 
-public interface FileManagerService {
+public interface IFileManagerService {
     List<DirectoryItem> findByDirName(String dirName);
 
     List<FileItem> findFilesByDirName(String dirName);

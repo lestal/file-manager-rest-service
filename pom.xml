@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>directory</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Demo project for REST File manager service</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -22,7 +22,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-	</properties>
+		<springfox.swagger2>2.2.2</springfox.swagger2>
+		<springfox.swagger2.ui>2.2.2</springfox.swagger2.ui>
+        <spring-tx.version>4.3.5.RELEASE</spring-tx.version>
+        <asciidoctor-maven-plugin.version>1.5.2</asciidoctor-maven-plugin.version>
+    </properties>
 
 	<dependencies>
 
@@ -48,17 +52,17 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.2.2</version>
+            <version>${springfox.swagger2}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.2.2</version>
+            <version>${springfox.swagger2.ui}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>4.3.5.RELEASE</version>
+            <version>${spring-tx.version}</version>
         </dependency>
     </dependencies>
 
@@ -71,7 +75,7 @@
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>1.5.2</version>
+                <version>${asciidoctor-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>generate-docs</id>
