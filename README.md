@@ -18,8 +18,8 @@ Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/
 ```shell
 mvn spring-boot:run
 ```
-##Usage:
-###Assuming that application has access only to 'target' folder
+## Usage:
+### Assuming that application has access only to 'target' folder
 
 1. GET /api/dir/{dirName} returns a list of all of the subdirectories with paths and files counts;
 Examples: 
@@ -63,4 +63,4 @@ Notes: 	If directory does not exist then returns status 404
 </error>
 </errors>
 ```
-###Running 'mvn prepare-package' will generate all the API docs located in 'target/generated-snippets/api-guide.html'
+### Running 'mvn prepare-package' will generate all the API docs located in 'target/generated-snippets/api-guide.html'
