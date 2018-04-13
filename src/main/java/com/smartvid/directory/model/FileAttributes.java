@@ -8,14 +8,6 @@ public class FileAttributes {
     private String modifiedDate;
     private String rights;
 
-    public FileAttributes(Long size, Boolean hidden, String createdDate, String modifiedDate, String rights) {
-        this.size = size;
-        this.hidden = hidden;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
-        this.rights = rights;
-    }
-
     public FileAttributes() {
     }
     public static FileAttributesBuilder newBuilder() {

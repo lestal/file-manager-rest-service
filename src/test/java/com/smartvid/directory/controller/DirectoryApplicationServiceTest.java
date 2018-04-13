@@ -22,7 +22,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.nio.charset.Charset;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
@@ -31,10 +30,10 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-//@WebMvcTest(FileManagerController.class)
 @SpringBootTest(classes = DirectoryApplication.class)
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets")
 @WebAppConfiguration
@@ -66,7 +65,6 @@ public class DirectoryApplicationServiceTest {
     public void shouldReturnSubDirsWithFilesCount() throws Exception {
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/api/dir/{dirName}", "one")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$[0].path", containsString("one\\sub_one")))
                 .andDo(document("{method-name}",
                         pathParameters(
                                 parameterWithName("dirName").description("Directory name")

@@ -19,7 +19,6 @@ public class FileItem  extends AbstractTreeNode<Item> implements Item {
     }
     @Override
     public ItemType getType() {
-
         return ItemType.FILE;
     }
 }

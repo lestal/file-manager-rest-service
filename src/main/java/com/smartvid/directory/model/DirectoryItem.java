@@ -8,18 +8,9 @@ import java.util.List;
 
 public class DirectoryItem extends AbstractTreeNode<Item> implements Item {
     private Integer filesCount;
-    public DirectoryItem(List<Item> children, String name) {
-        super(children, name);
-    }
-
     public DirectoryItem(List<Item> children, String name, Integer filesCount) {
         super(children, name);
         this.filesCount = filesCount;
-    }
-
-    public DirectoryItem(String name) {
-        super(name);
-
     }
 
     @Override
