@@ -1,0 +1,78 @@
+= File manager REST Service API Guide
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+ 
+
+== File manager REST Service
+
+=== By directory name get a list of all of the subdirectories with paths and files counts
+==== Request structure
+ 
+include::{snippets}/should-return-sub-dirs-with-files-count/http-request.adoc[]
+ 
+==== Request parameters
+ 
+include::{snippets}/should-return-sub-dirs-with-files-count/path-parameters.adoc[]
+ 
+==== Response fields
+ 
+include::{snippets}/should-return-sub-dirs-with-files-count/response-fields.adoc[]
+ 
+==== Example response
+ 
+include::{snippets}/should-return-sub-dirs-with-files-count/http-response.adoc[]
+ 
+==== CURL request
+ 
+include::{snippets}/should-return-sub-dirs-with-files-count/curl-request.adoc[]
+ 
+=== By a particular directory get list of files in that directory
+ 
+==== Request structure
+ 
+include::{snippets}/should-return-list-of-files-in-dir/http-request.adoc[]
+
+==== Request parameters
+
+include::{snippets}/should-return-list-of-files-in-dir/path-parameters.adoc[]
+
+ 
+==== Response fields
+ 
+include::{snippets}/should-return-list-of-files-in-dir/response-fields.adoc[]
+ 
+==== Example response
+ 
+include::{snippets}/should-return-list-of-files-in-dir/http-response.adoc[]
+ 
+==== CURL request
+ 
+include::{snippets}/should-return-list-of-files-in-dir/curl-request.adoc[]
+ 
+=== By a particular file name get all of the standard file attributes for that file
+
+==== Request structure
+
+include::{snippets}/should-return-file-attributes-for-a-given-dir/http-request.adoc[]
+
+==== Request parameters
+
+include::{snippets}/should-return-list-of-files-in-dir/path-parameters.adoc[]
+
+
+==== Response fields
+
+include::{snippets}/should-return-list-of-files-in-dir/response-fields.adoc[]
+
+==== Example response
+
+include::{snippets}/should-return-list-of-files-in-dir/http-response.adoc[]
+
+==== CURL request
+
+include::{snippets}/should-return-list-of-files-in-dir/curl-request.adoc[]
+
