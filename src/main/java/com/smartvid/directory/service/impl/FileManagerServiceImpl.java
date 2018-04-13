@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -31,7 +32,7 @@ import java.util.stream.Stream;
 public class FileManagerServiceImpl implements FileManagerService {
     private final static String BASE_DIR = "target";
     private final static URL ROOT_RESOURCE = getRoot();
-    private static final Logger LOGGER = Logger.getLogger(FileManagerServiceImpl.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(FileManagerServiceImpl.class.getName());
 
     static {
         populateInitialDirs();
@@ -74,8 +75,7 @@ public class FileManagerServiceImpl implements FileManagerService {
             throw new DirNotFoundException(dirName);
         }
         Path file = f.toPath();
-        FileAttributes.FileAttributesBuilder builder = new FileAttributes().newBuilder();
-
+        FileAttributes.FileAttributesBuilder builder = FileAttributes.newBuilder();
         try {
             BasicFileAttributes bfa = Files.readAttributes(file, BasicFileAttributes.class);
             builder.setCreationTime(bfa.creationTime().toString());
@@ -134,7 +134,7 @@ public class FileManagerServiceImpl implements FileManagerService {
 
     private static void logIfNotCreated(boolean newFile, String dir) {
         if (!newFile) {
-            LOGGER.log(Level.WARNING, "File or dir " + dir + " is not created.");
+            LOGGER.log(Level.WARNING, MessageFormat.format("File or dir {0} is not created.", dir));
         }
     }
 
