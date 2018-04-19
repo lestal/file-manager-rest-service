@@ -48,7 +48,7 @@ public class FileManagerServiceImpl implements IFileManagerService {
     public List<DirectoryItem> findByDirName(String dirName) {
         List<DirectoryItem> directoryItems;
         try (Stream<Path> walks = Files.walk(Paths.get(BASE_DIR, dirName))) {
-            directoryItems = walks.filter(p -> !p.toString().equals(BASE_DIR + File.separator + dirName))
+            directoryItems = walks.parallel().filter(p -> !p.toString().equals(BASE_DIR + File.separator + dirName))
                     .filter(Files::isDirectory)
                     .map(p -> new DirectoryItem(getSubDirs(p.toFile()), p.toFile().getAbsolutePath(),
                             getFilesCountInDir(p.toFile())))
